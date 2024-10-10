@@ -98,7 +98,7 @@ module.exports = function( options ) {
     };
     this.put = async (opt) => {
         let url = buildUrl(options, opt);
-        let body = opt['body'];
+        let xml = opt['body'];
         let req = await exec({
             url: url,
             method: 'PUT',
@@ -106,10 +106,11 @@ module.exports = function( options ) {
                 'Authorization': 'Basic ' + base64_key,
                 'Content-Type': 'application/json'
             },
-            body: opt['output_format'] === 'JSON' ? JSON.stringify(body) : body
+            body: opt['output_format'] === 'JSON' ? JSON.stringify(xml) : xml
         });
         return JSON.parse(req['response'])
     };
+
     this.delete = async (opt) => {
         let url = buildUrl(options, opt);
         let req = await exec({
